@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index images</title>
+</head>
+<body>
+<h2>I am a H2 label</h2>
+<!--<img src="/aaa.jpg">-->
+<div>
+    <img th:src="'/' + ${fileName}">
+    <button onclick="moveTo('true')">true</button>
+    <button onclick="moveTo('false')">false</button>
+</div>
+
+<script>
+    function init() {
+        console.log("init() method")
+    }
+    function moveTo(str) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET","/imageClassification/bbb?fileName=" + str);
+        xhr.onload = ev => {
+
+            console.log("ok")
+        };
+        xhr.send();
+    }
+    init();
+</script>
+
+<!--<div>-->
+<!--    <table border="1">-->
+<!--        <thead>-->
+<!--            <td>images</td>-->
+<!--            <td>checked</td>-->
+<!--        </thead>-->
+<!--        <tr th:each="fileName:${fileNames}">-->
+<!--            <td>-->
+<!--                <img th:src="'/'+${fileName}">-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                -->
+<!--            </td>-->
+<!--        </tr>-->
+
+<!--    </table>-->
+
+<!--</div>-->
+</body>
+</html>

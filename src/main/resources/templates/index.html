@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index images</title>
+
+    <style type="text/css">
+        #imagediv{
+            width: 1000px;
+            height: 800px;
+            background: antiquewhite;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="imagediv">
+    <h2 th:text="${fileName}"></h2>
+    <img id="imageId" th:src="'/' + ${fileName}">
+</div>
+<button onclick="moveTo('true')">true</button>
+<button onclick="moveTo('false')">false</button>
+
+<script>
+    function init() {
+        console.log("init() method")
+    }
+    function moveTo(flag) {
+        const xhr = new XMLHttpRequest();
+        let urlArray = document.getElementById("imageId").src.split("/");
+        let imageName = urlArray[urlArray.length - 1];
+
+        xhr.open("GET","/imageClassification/bbb?flag=" + flag + "&imageName=" + imageName);
+        xhr.onload = ev => {
+            console.log("status code: " + xhr.status);
+            console.log("response type: " + xhr.response);
+            document.getElementById("imageId").src = "/" +  xhr.response;
+            console.log("ok000000")
+        };
+        xhr.send();
+
+    }
+    init();
+</script>
+
+<!--<div>-->
+<!--    <table border="1">-->
+<!--        <thead>-->
+<!--            <td>images</td>-->
+<!--            <td>checked</td>-->
+<!--        </thead>-->
+<!--        <tr th:each="fileName:${fileNames}">-->
+<!--            <td>-->
+<!--                <img th:src="'/'+${fileName}">-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                -->
+<!--            </td>-->
+<!--        </tr>-->
+
+<!--    </table>-->
+
+<!--</div>-->
+</body>
+</html>
