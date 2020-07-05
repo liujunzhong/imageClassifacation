@@ -36,6 +36,7 @@
             console.log("status code: " + xhr.status);
             console.log("response type: " + xhr.response);
             document.getElementById("imageId").src = "/" +  xhr.response;
+            document.getElementById("h2Id").innerText = xhr.response;
             console.log("ok000000")
         };
         xhr.send();
